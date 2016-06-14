@@ -7,3 +7,8 @@ flink-binaries:
         - archive_format: tar
         - user: flink
         - group: flink
+    file.symlink:
+        - name: /opt/flink
+        - target: /opt/flink-1.0.3
+        - user: flink
+        - group: flink
