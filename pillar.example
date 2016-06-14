@@ -1,0 +1,11 @@
+# See: https://flink.apache.org/downloads.html
+
+# It will install Flink 1.0.3 for Hadoop 2.6.0 and Scala 2.10
+flink:
+    hadoop_version: '26'
+    scala_version: '2.10'
+
+# It will install Flink 1.0.0 for Hadoop 2.7.0 and Scala 2.11
+flink:
+    version: '1.0.0'
+
