@@ -1,0 +1,4 @@
+flink:
+    version: '1.0.3'
+    hadoop_version: '27'
+    scala_version: '2.11'
