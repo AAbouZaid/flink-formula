@@ -1,0 +1,32 @@
+{%
+set dependencies = salt['grains.filter_by'](
+    {
+        'default': {
+            'packages':[
+                'openjdk-7-jre',
+                'ssh'
+            ],
+        },
+        'Debian': {
+        },
+        'Ubuntu': {
+        },
+        'CentOS': {
+            'packages':[
+                'java-1.7.0-openjdk',
+                'openssh'
+            ],
+        },
+        'RedHat': {
+            'packages':[
+                'java-1.7.0-openjdk',
+                'openssh'
+            ],
+        },
+    },
+    grain='os_family',
+    merge=salt['pillar.get']('dependencies:lookup'),
+    default='default',
+    base='default'
+)
+%}
