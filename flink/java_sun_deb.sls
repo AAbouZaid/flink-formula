@@ -1,5 +1,5 @@
 # Ref: http://www.webupd8.org/2014/03/how-to-install-oracle-java-8-in-debian.html
-webupd8team:
+java_sun_deb:
     pkg.installed:
         - pkgs:
             - debconf
