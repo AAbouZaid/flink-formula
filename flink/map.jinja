@@ -3,8 +3,10 @@ set dependencies = salt['grains.filter_by'](
     {
         'default': {
             'packages':[
-                'openjdk-7-jre-headless',
-                'ssh'
+                'oracle-java8-installer',
+                'oracle-java8-set-default',
+                'openssh-client',
+                'openssh-server'
             ],
         },
         'Debian': {
