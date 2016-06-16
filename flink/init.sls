@@ -1,6 +1,6 @@
 include:
     - flink.java
-    - flink.dependencies
+    - flink.ssh
     - flink.user
     - flink.binaries
 
