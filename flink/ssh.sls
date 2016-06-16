@@ -15,5 +15,5 @@ configure-ssh:
 run-ssh-server:
     service.running:
         - name: {{ ssh.service }}
-        - enabled: True
+        - enable: True
 
