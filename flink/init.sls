@@ -1,7 +1,7 @@
 include:
-{% if grains.os_family in ['Debian', 'Ubuntu'] %}
+{% if grains.os in ['Debian', 'Ubuntu'] %}
     - flink.java_sun_deb
-{% elif grains.os_family in ['CentOS', 'RedHat']%}
+{% elif grains.os in ['CentOS', 'RedHat']%}
     - flink.java_sun_rpm
 {% endif %}
     - flink.dependencies

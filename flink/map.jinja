@@ -33,7 +33,7 @@ set dependencies = salt['grains.filter_by'](
             ],
         },
     },
-    grain='os_family',
+    grain='os',
     merge=salt['pillar.get']('dependencies:lookup'),
     default='default',
     base='default'
