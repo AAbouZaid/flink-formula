@@ -2,3 +2,8 @@ flink:
     version: '1.0.3'
     hadoop_version: '27'
     scala_version: '2.11'
+
+java:
+    url: 'http://download.oracle.com/otn-pub/java/jdk/8u92-b14/jre-8u92-linux-i586.tar.gz'
+    name: 'jre1.8.0_92'
+    hash: '7203592329877735bb6259844a3a30640edc61920d132f952c40ab2e2014b224'
