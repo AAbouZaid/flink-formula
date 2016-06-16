@@ -1,40 +1,40 @@
 {%
-set dependencies = salt['grains.filter_by'](
+set ssh = salt['grains.filter_by'](
     {
         'default': {
             'packages':[],
         },
         'Debian': {
             'packages':[
-                'oracle-java8-installer',
-                'oracle-java8-set-default',
                 'openssh-client',
                 'openssh-server',
             ],
+            'service': 'ssh',
         },
         'Ubuntu': {
              'packages':[
-                'oracle-java8-installer',
-                'oracle-java8-set-default',
                 'openssh-client',
                 'openssh-server',
             ],
+            'service': 'ssh',
         },
         'CentOS': {
             'packages':[
-                'java-1.7.0-openjdk',
-                'openssh'
+                'openssh-clients',
+                'openssh-server',
             ],
+            'service': 'sshd',
         },
         'RedHat': {
             'packages':[
-                'java-1.7.0-openjdk',
-                'openssh'
+                'openssh-clients',
+                'openssh-server',
             ],
+            'service': 'sshd',
         },
     },
     grain='os',
-    merge=salt['pillar.get']('dependencies:lookup'),
+    merge=salt['pillar.get']('ssh:lookup'),
     default='default',
     base='default'
 )
