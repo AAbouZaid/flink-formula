@@ -20,27 +20,36 @@ It creates the `flink` user.
 
 ### [`flink.java`](./flink/java.sls)
 
-It installs Oracle Java 8. The state can be modified via pillars (see
-[pillar.example](./pillar.example)).
+It installs Oracle Java 8.
+The state can be modified via pillars.
 
 ### [`flink.ssh`](./flink/ssh.sls)
+
+> To be finalised
 
 It installs and configures OpenSSH as Flink likes.
 
 ### [`flink.binaries`](./flink/binaries.sls)
 
-It installs the Flink's binaries. The state can be modified via pillars (see
-[pillar.example](./pillar.example)).
+It installs the Flink's binaries.
+The state can be modified via pillars.
 
 ### [`flink.jobmanager`](./flink/jobmanager.sls)
 
 > To be implemented
 
+It configures a Flink's jobmanager.
+The state can be modified via pillars.
+
 ### [`flink.taskmanager`](./flink/taskmanager.sls)
 
 > To be implemented
+
+It configures a Flink's taskmanager.
+The state can be modified via pillars.
 
 ## References
 
 * [Apache Flink](https://flink.apache.org/)
 * [Salt Formulas](https://docs.saltstack.com/en/latest/topics/development/conventions/formulas.html)
+
