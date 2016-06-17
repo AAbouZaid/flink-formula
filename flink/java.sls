@@ -14,7 +14,7 @@ install-java:
         - name: /opt/
         - if_missing: /opt/{{ java.name }}
         - source: file://{{ tar_file }}
-        - source_hash: sha256={{ java.hash }}
+        - source_hash: {{ java.hash }}
         - archive_format: tar
     file.symlink:
         - name: /opt/java
