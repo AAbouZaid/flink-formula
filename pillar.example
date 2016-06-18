@@ -14,3 +14,11 @@ java:
     url: 'http://download.oracle.com/otn-pub/java/jdk/7u80-b15/jre-7u80-linux-i586.tar.gz'
     name: 'jre1.7.0_80'
     hash: 'md5=0811a4045714bd8f1e1577e318528597'
+
+# Configures the Flink's jobmanager
+jobmanager:
+    slaves:
+        - '192.168.1.100'
+        - 'flink-slave-1'
+        - '192.168.1.24'
+        - 'flink-slave-2'
