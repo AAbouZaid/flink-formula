@@ -3,15 +3,17 @@
 {% do default_settings.jobmanager.update(salt['pillar.get']('jobmanager', {})) %}
 
 {% if jobmanager.slaves is defined %}
-clean_slaves_file:
-    cmd.run:
-        - name: cat /dev/null > {{ jobmanager.slaves_file }}
-
 add_slaves:
-    file.append:
+    file.managed:
         - name: {{ jobmanager.slaves_file }}
-        - text:
-        {% for slave in jobmanager.slaves %}
-            - {{ slave }}
-        {% endfor %}
+        - source: salt://flink/files/slaves.jinja
+        - template: jinja
+        - context:
+            jobmanager: {{ jobmanager }}
 {% endif %}
+
+flink-conf:
+    file.managed:
+        - name: '/tmp/flink-conf.yaml'
+        - source: salt://flink/files/flink-conf.jinja
+        - template: jinja
