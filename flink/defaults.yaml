@@ -2,11 +2,28 @@ flink:
     version: '1.0.3'
     hadoop_version: '27'
     scala_version: '2.11'
+    home: '/opt/flink'
+    conf: '/opt/flink/conf'
+    user: 'flink'
+    group: 'flink'
+    settings:
+        jobmanager_rpc_address: 'flink-master'
+        taskmanager_numberOfTaskSlots: 1
+        parallelization_degree_default: 3
+    masters:
+        - host_name: 'flink-master'
+          ip_addr: '127.0.1.254'
+    slaves:
+        - host_name: 'flink-slave-1'
+          ip_addr: '127.0.1.1'
+        - host_name: 'flink-slave-2'
+          ip_addr: '127.0.1.2'
+        - host_name: 'flink-slave-3'
+          ip_addr: '127.0.1.3'
 
 java:
-    url: 'http://download.oracle.com/otn-pub/java/jdk/8u92-b14/jre-8u92-linux-i586.tar.gz'
+    url: 'http://download.oracle.com/otn-pub/java/jdk/8u92-b14/jre-8u92-linux-x64.tar.gz'
     name: 'jre1.8.0_92'
-    hash: 'sha256=7203592329877735bb6259844a3a30640edc61920d132f952c40ab2e2014b224'
+    hash: 'sha256=79a3f25e9b466cb9e969d1772ea38550de320c88e9119bf8aa11ce8547c39987'
+    home: '/opt/java'
 
-jobmanager:
-    slaves_file: '/opt/flink/conf/slaves'
