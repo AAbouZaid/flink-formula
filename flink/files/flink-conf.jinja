@@ -19,21 +19,22 @@
 # limitations under the License.
 ##############################################################################
 
-jobmanager.rpc.address: %jobmanager%
+jobmanager.rpc.address: {{ settings.jobmanager_rpc_address }}
 jobmanager.rpc.port: 6123
 jobmanager.heap.mb: 128
 
 taskmanager.rpc.port: 6121
 taskmanager.data.port: 6122
 taskmanager.heap.mb: 256
-taskmanager.numberOfTaskSlots: %nb_slots%
+taskmanager.numberOfTaskSlots: {{ settings.taskmanager_numberOfTaskSlots }}
 
-parallelization.degree.default: %parallelism%
+parallelization.degree.default: {{ settings.parallelization_degree_default }}
 
-env.java.home: /usr/java/default
+env.java.home: {{ java.home }}
 
 #=============================================================================
 # Web Frontend
 #=============================================================================
 
 jobmanager.web.port: 8080
+

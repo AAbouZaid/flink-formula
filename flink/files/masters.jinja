@@ -1,5 +1,5 @@
 # This file was generated with SaltStack.
 # Manual changes will be overwritten at the next run of SaltStack.
-{%- for slave in slaves %}
-{{ slave.host_name }}
+{%- for master in masters %}
+{{ master.host_name }}
 {%- endfor %}
