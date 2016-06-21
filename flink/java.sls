@@ -5,11 +5,11 @@
 {% set curl_opts = '-b oraclelicense=accept-securebackup-cookie -L -s' %}
 {% set tar_file = '/tmp/java.tar.gz' %}
 
-download-jre-tarball:
+download_jre_tarball:
     cmd.run:
         - unless: curl {{ curl_opts }} -o "{{ tar_file }}" {{ flink.java.url }}
 
-extract-jre-tarball:
+extract_jre_tarball:
     archive.extracted:
         - name: /opt/
         - if_missing: /opt/{{ flink.java.name }}
@@ -17,12 +17,12 @@ extract-jre-tarball:
         - source_hash: {{ flink.java.hash }}
         - archive_format: tar
 
-symlink-to-java-home:
+symlink_to_java_home:
     file.symlink:
         - name: {{ flink.java.home }}
         - target: /opt/{{ flink.java.name }}
 
-set-java-home-env:
+set_java_home_env:
     file.managed:
         - name: /etc/profile.d/sun-java.sh
         - source: salt://flink/files/sun-java.jinja
@@ -33,7 +33,7 @@ set-java-home-env:
         - context:
             java_home: {{ flink.java.home }}
 
-remove-jre-tarball:
+remove_jre_tarball:
     file.absent:
         - name: {{ tar_file }}
 

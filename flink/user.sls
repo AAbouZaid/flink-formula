@@ -2,7 +2,7 @@
 {% set flink = default_settings.get('flink') %}
 {% do default_settings.flink.update(salt['pillar.get']('flink', {})) %}
 
-flink-user:
+create_flink_user:
     user.present:
         - name: {{ flink.user }}
         - fullname: Flink User

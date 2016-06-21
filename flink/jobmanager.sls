@@ -5,7 +5,7 @@
 {% do default_settings.java.update(salt['pillar.get']('java', {})) %}
 
 {% if flink.masters is defined %}
-add_masters:
+add_flink_masters:
     file.managed:
         - name: '{{ flink.conf }}/masters'
         - source: salt://flink/files/masters.jinja
@@ -14,7 +14,7 @@ add_masters:
             masters: {{ flink.masters }}
 
 {% for master in flink.masters %}
-add_{{ master.host_name }}_to_hosts:
+add_{{ master.host_name }}_to_hosts_file:
     host.only:
         - name: {{ master.ip_addr }}
         - hostnames: {{ master.host_name }}
@@ -22,7 +22,7 @@ add_{{ master.host_name }}_to_hosts:
 {% endif %}
 
 {% if flink.slaves is defined %}
-add_slaves:
+add_flink_slaves:
     file.managed:
         - name: '{{ flink.conf }}/slaves'
         - source: salt://flink/files/slaves.jinja
@@ -31,14 +31,14 @@ add_slaves:
             slaves: {{ flink.slaves }}
 
 {% for slave in flink.slaves %}
-add_{{ slave.host_name }}_to_hosts:
+add_{{ slave.host_name }}_to_hosts_file:
     host.only:
         - name: {{ slave.ip_addr }}
         - hostnames: {{ slave.host_name }}
 {% endfor %}
 {% endif %}
 
-flink-conf:
+configure_flink:
     file.managed:
         - name: '{{ flink.conf}}/flink-conf.yaml'
         - source: salt://flink/files/flink-conf.jinja
