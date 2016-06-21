@@ -20,8 +20,18 @@ It creates the `flink` user.
 
 ### [`flink.java`](./flink/java.sls)
 
-It installs Oracle Java 8.
-The state can be modified via pillars.
+It installs Oracle Java Runtime Environment.
+The state can be modified via pillars as follows
+
+    flink:
+        java:
+            url: 'http://download.oracle.com/otn-pub/java/jdk/7u80-b15/jre-7u80-linux-i586.tar.gz'
+            name: 'jre1.7.0_80'
+            hash: 'md5=0811a4045714bd8f1e1577e318528597'
+            home: '/alternative/java/home'
+
+This state is inspired and can be substituted by
+[sun-java-formula](https://github.com/saltstack-formulas/sun-java-formula).
 
 ### [`flink.ssh`](./flink/ssh.sls)
 
