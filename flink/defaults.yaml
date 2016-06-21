@@ -20,10 +20,9 @@ flink:
           ip_addr: '127.0.1.2'
         - host_name: 'flink-slave-3'
           ip_addr: '127.0.1.3'
-
-java:
-    url: 'http://download.oracle.com/otn-pub/java/jdk/8u92-b14/jre-8u92-linux-x64.tar.gz'
-    name: 'jre1.8.0_92'
-    hash: 'sha256=79a3f25e9b466cb9e969d1772ea38550de320c88e9119bf8aa11ce8547c39987'
-    home: '/opt/java'
+    java:
+        url: 'http://download.oracle.com/otn-pub/java/jdk/8u92-b14/jre-8u92-linux-x64.tar.gz'
+        name: 'jre1.8.0_92'
+        hash: 'sha256=79a3f25e9b466cb9e969d1772ea38550de320c88e9119bf8aa11ce8547c39987'
+        home: '/opt/java'
 
