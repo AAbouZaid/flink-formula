@@ -21,14 +21,16 @@ It creates the `flink` user.
 ### [`flink.java`](./flink/java.sls)
 
 It installs Oracle Java Runtime Environment.
-The state can be modified via pillars as follows
+The state can be modified via pillar as follows
 
-    flink:
-        java:
-            url: 'http://download.oracle.com/otn-pub/java/jdk/7u80-b15/jre-7u80-linux-i586.tar.gz'
-            name: 'jre1.7.0_80'
-            hash: 'md5=0811a4045714bd8f1e1577e318528597'
-            home: '/alternative/java/home'
+```yaml
+flink:
+    java:
+        url: 'http://download.oracle.com/otn-pub/java/jdk/7u80-b15/jre-7u80-linux-i586.tar.gz'
+        name: 'jre1.7.0_80'
+        hash: 'md5=0811a4045714bd8f1e1577e318528597'
+        home: '/alternative/java/home'
+```
 
 This state is inspired and can be substituted by
 [sun-java-formula](https://github.com/saltstack-formulas/sun-java-formula).
@@ -46,10 +48,20 @@ The state can be modified via pillars.
 
 ### [`flink.jobmanager`](./flink/jobmanager.sls)
 
-> To be implemented
-
 It configures a Flink's jobmanager.
-The state can be modified via pillars.
+The state can be modified via pillar as follow.
+
+```yaml
+flink_conf:
+    jobmanager.heap.mb: 256
+    jobmanager.rpc.address: localhost
+    jobmanager.rpc.port: 6123
+    jobmanager.web.port: 8081
+    parallelism.default: 1
+    taskmanager.heap.mb: 512
+    taskmanager.memory.preallocate: false
+    taskmanager.numberOfTaskSlots: 1
+```
 
 ### [`flink.taskmanager`](./flink/taskmanager.sls)
 
