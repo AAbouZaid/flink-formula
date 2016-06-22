@@ -14,10 +14,12 @@ add_flink_masters:
             masters: {{ flink.masters }}
 
 {% for master in flink.masters %}
+{% if master.ip_addr is defined %}
 add_{{ master.host_name }}_to_hosts_file:
     host.only:
         - name: {{ master.ip_addr }}
         - hostnames: {{ master.host_name }}
+{% endif %}
 {% endfor %}
 {% endif %}
 
@@ -31,10 +33,12 @@ add_flink_slaves:
             slaves: {{ flink.slaves }}
 
 {% for slave in flink.slaves %}
+{% if slave.ip_addr is defined %}
 add_{{ slave.host_name }}_to_hosts_file:
     host.only:
         - name: {{ slave.ip_addr }}
         - hostnames: {{ slave.host_name }}
+{% endif %}
 {% endfor %}
 {% endif %}
 
