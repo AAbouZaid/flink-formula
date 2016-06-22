@@ -1,8 +1,8 @@
 {% import_yaml 'flink/defaults.yaml' as default_settings %}
 {% set flink = default_settings.get('flink') %}
 {% do default_settings.flink.update(salt['pillar.get']('flink', {})) %}
-{% set java = default_settings.get('java') %}
-{% do default_settings.java.update(salt['pillar.get']('java', {})) %}
+{% set flink_conf = default_settings.get('flink_conf') %}
+{% do default_settings.flink_conf.update(salt['pillar.get']('flink_conf', {})) %}
 
 {% if flink.masters is defined %}
 add_flink_masters:
@@ -44,6 +44,5 @@ configure_flink:
         - source: salt://flink/files/flink-conf.jinja
         - template: jinja
         - context:
-            settings: {{ flink.settings }}
-            java: {{ java }}
+            flink_conf: {{ flink_conf }}
 
