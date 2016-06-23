@@ -1,34 +1,50 @@
 flink:
-    version: '1.0.3'
-    hadoop_version: '27'
-    scala_version: '2.11'
-    home: '/opt/flink'
-    conf: '/opt/flink/conf'
-    user: 'flink'
-    group: 'flink'
-    masters:
-        - host_name: 'flink-master'
-          ip_addr: '127.0.1.254'
-    slaves:
-        - host_name: 'flink-slave-1'
-          ip_addr: '127.0.1.1'
-        - host_name: 'flink-slave-2'
-          ip_addr: '127.0.1.2'
-        - host_name: 'flink-slave-3'
-          ip_addr: '127.0.1.3'
+    # Flink's version
+    version: 1.0.3
+    hadoop_version: 27
+    scala_version: 2.11
+    binaries_base_url: http://mirror.nohup.it/apache
+    hash_base_url: http://www-eu.apache.org
+    # Java's version
     java:
-        url: 'http://download.oracle.com/otn-pub/java/jdk/8u92-b14/jre-8u92-linux-x64.tar.gz'
-        name: 'jre1.8.0_92'
-        hash: 'sha256=79a3f25e9b466cb9e969d1772ea38550de320c88e9119bf8aa11ce8547c39987'
-        home: '/opt/java'
-
-flink_conf:
-    jobmanager.heap.mb: 256
-    jobmanager.rpc.address: localhost
-    jobmanager.rpc.port: 6123
-    jobmanager.web.port: 8081
-    parallelism.default: 1
-    taskmanager.heap.mb: 512
-    taskmanager.memory.preallocate: false
-    taskmanager.numberOfTaskSlots: 1
-
+        url: http://download.oracle.com/otn-pub/java/jdk/8u92-b14/jre-8u92-linux-x64.tar.gz
+        name: jre1.8.0_92
+        hash: sha256=79a3f25e9b466cb9e969d1772ea38550de320c88e9119bf8aa11ce8547c39987
+        home: /opt/java
+    # Flink's envoronment
+    env:
+        home: /opt/flink
+        conf: /opt/flink/conf
+        user: flink
+        # groups where flink will be member to (optional)
+        #groups:
+            #- root
+            #- cluster
+    # Flink's configuration (optional)
+    #conf:
+        #jobmanager.heap.mb: 256
+        #jobmanager.rpc.address: localhost
+        #jobmanager.rpc.port: 6123
+        #jobmanager.web.port: 8081
+        #parallelism.default: 1
+        #taskmanager.heap.mb: 512
+        #taskmanager.memory.preallocate: false
+        #taskmanager.numberOfTaskSlots: 1
+    # jobmanager specific (optional)
+    #slaves:
+        #- host_name: flink-slave-1
+          #ip_addr: 192.168.100.1
+        #- host_name: flink-slave-2
+          #ip_addr: 192.168.100.2
+        #- host_name: flink-slave-3
+          #ip_addr: 192.168.100.3
+    # taskmanager specific (optional)
+    #master:
+        #host_name: flink-master
+        #ip_addr: 192.168.100.254
+        #pubkey: >
+            #SvFpPT+iTcGpwsds2gdtsRgT0zCMGqJiYqPD7Fi42bptW7l/A7k51SZus4af9Zjs
+            #9/grwIjHFpu61VcGcSZMUD6+vijrnMkaXTf0Sw7B171wl/+LPfvq9hGp3mM1cT2H
+            #jbY/BoZq8+mNVNQjF6cW0VfUKXfi8c0NZziF/QfHzLpsqFIlKVTY+/k2+zkNvvm3
+            #c+mvsXvM1iwFR94vFEY00F5jW/RiDt4XfRuDRlotHxV4W2McFaCU3LWuCIZTpowc
+            #/TUrLKuoIYYZDeNb7ZEz5ICfuhxbgc1wYSsgieLtb74=

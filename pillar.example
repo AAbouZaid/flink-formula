@@ -1,24 +1,136 @@
-# See: https://flink.apache.org/downloads.html
+# ----------------------------------------------------------------------------
+# Jobmanager example
+# ----------------------------------------------------------------------------
 
-# It will install Flink 1.0.3 for Hadoop 2.6.0 and Scala 2.10
 flink:
-    hadoop_version: '26'
-    scala_version: '2.10'
-
-# It will install Flink 1.0.0 for Hadoop 2.7.0 and Scala 2.11
-flink:
-    version: '1.0.0'
-
-# It will install Oracle JRE 7u80
-java:
-    url: 'http://download.oracle.com/otn-pub/java/jdk/7u80-b15/jre-7u80-linux-i586.tar.gz'
-    name: 'jre1.7.0_80'
-    hash: 'md5=0811a4045714bd8f1e1577e318528597'
-
-# Configures the Flink's jobmanager
-jobmanager:
+    # Flink's version
+    version: 1.0.3
+    hadoop_version: 27
+    scala_version: 2.11
+    binaries_base_url: http://mirror.nohup.it/apache
+    hash_base_url: http://www-eu.apache.org
+    # Java's version
+    java:
+        url: http://download.oracle.com/otn-pub/java/jdk/8u92-b14/jre-8u92-linux-x64.tar.gz
+        name: jre1.8.0_92
+        hash: sha256=79a3f25e9b466cb9e969d1772ea38550de320c88e9119bf8aa11ce8547c39987
+        home: /opt/java
+    # Flink's envoronment
+    env:
+        home: /opt/flink
+        conf: /opt/flink/conf
+        user: flink
+    # Flink's configuration (optional)
+    conf:
+        jobmanager.heap.mb: 256
+        jobmanager.rpc.address: localhost
+        jobmanager.rpc.port: 6123
+        jobmanager.web.port: 8081
+        parallelism.default: 1
+        taskmanager.heap.mb: 512
+        taskmanager.memory.preallocate: false
+        taskmanager.numberOfTaskSlots: 1
+    # slave nodes
     slaves:
-        - '192.168.1.100'
-        - 'flink-slave-1'
-        - '192.168.1.24'
-        - 'flink-slave-2'
+        - host_name: flink-slave-1
+          ip_addr: 192.168.100.1
+        - host_name: flink-slave-2
+          ip_addr: 192.168.100.2
+        - host_name: flink-slave-3
+          ip_addr: 192.168.100.3
+
+# ----------------------------------------------------------------------------
+# Taskmanager example
+# ----------------------------------------------------------------------------
+
+flink:
+    # Flink's version
+    version: 1.0.3
+    hadoop_version: 27
+    scala_version: 2.11
+    binaries_base_url: http://mirror.nohup.it/apache
+    hash_base_url: http://www-eu.apache.org
+    # Java's version
+    java:
+        url: http://download.oracle.com/otn-pub/java/jdk/8u92-b14/jre-8u92-linux-x64.tar.gz
+        name: jre1.8.0_92
+        hash: sha256=79a3f25e9b466cb9e969d1772ea38550de320c88e9119bf8aa11ce8547c39987
+        home: /opt/java
+    # Flink's envoronment
+    env:
+        home: /opt/flink
+        conf: /opt/flink/conf
+        user: flink
+    # Flink's configuration
+    conf:
+        jobmanager.heap.mb: 256
+        jobmanager.rpc.address: flink-master
+        jobmanager.rpc.port: 6123
+        jobmanager.web.port: 8081
+        parallelism.default: 1
+        taskmanager.heap.mb: 512
+        taskmanager.memory.preallocate: false
+        taskmanager.numberOfTaskSlots: 1
+    # master
+    master:
+        host_name: flink-master
+        ip_addr: 192.168.100.254
+        pubkey: >
+            SvFpPT+iTcGpwsds2gdtsRgT0zCMGqJiYqPD7Fi42bptW7l/A7k51SZus4af9Zjs
+            9/grwIjHFpu61VcGcSZMUD6+vijrnMkaXTf0Sw7B171wl/+LPfvq9hGp3mM1cT2H
+            jbY/BoZq8+mNVNQjF6cW0VfUKXfi8c0NZziF/QfHzLpsqFIlKVTY+/k2+zkNvvm3
+            c+mvsXvM1iwFR94vFEY00F5jW/RiDt4XfRuDRlotHxV4W2McFaCU3LWuCIZTpowc
+            /TUrLKuoIYYZDeNb7ZEz5ICfuhxbgc1wYSsgieLtb74=
+
+# ----------------------------------------------------------------------------
+# Full example
+# ----------------------------------------------------------------------------
+
+flink:
+    # Flink's version
+    version: 1.0.3
+    hadoop_version: 27
+    scala_version: 2.11
+    binaries_base_url: http://mirror.nohup.it/apache
+    hash_base_url: http://www-eu.apache.org
+    # Java's version
+    java:
+        url: http://download.oracle.com/otn-pub/java/jdk/8u92-b14/jre-8u92-linux-x64.tar.gz
+        name: jre1.8.0_92
+        hash: sha256=79a3f25e9b466cb9e969d1772ea38550de320c88e9119bf8aa11ce8547c39987
+        home: /opt/java
+    # Flink's envoronment
+    env:
+        home: /opt/flink
+        conf: /opt/flink/conf
+        user: flink
+        groups:
+            - root
+    # Flink's configuration (optional)
+    conf:
+        jobmanager.heap.mb: 256
+        jobmanager.rpc.address: localhost
+        jobmanager.rpc.port: 6123
+        jobmanager.web.port: 8081
+        parallelism.default: 1
+        taskmanager.heap.mb: 512
+        taskmanager.memory.preallocate: false
+        taskmanager.numberOfTaskSlots: 1
+    # jobmanager specific (optional)
+    slaves:
+        - host_name: flink-slave-1
+          ip_addr: 192.168.100.1
+        - host_name: flink-slave-2
+          ip_addr: 192.168.100.2
+        - host_name: flink-slave-3
+          ip_addr: 192.168.100.3
+    # taskmanager specific (optional)
+    master:
+        host_name: flink-master
+        ip_addr: 192.168.100.254
+        pubkey: >
+            SvFpPT+iTcGpwsds2gdtsRgT0zCMGqJiYqPD7Fi42bptW7l/A7k51SZus4af9Zjs
+            9/grwIjHFpu61VcGcSZMUD6+vijrnMkaXTf0Sw7B171wl/+LPfvq9hGp3mM1cT2H
+            jbY/BoZq8+mNVNQjF6cW0VfUKXfi8c0NZziF/QfHzLpsqFIlKVTY+/k2+zkNvvm3
+            c+mvsXvM1iwFR94vFEY00F5jW/RiDt4XfRuDRlotHxV4W2McFaCU3LWuCIZTpowc
+            /TUrLKuoIYYZDeNb7ZEz5ICfuhxbgc1wYSsgieLtb74=
