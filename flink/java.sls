@@ -1,26 +1,24 @@
-{% import_yaml 'flink/defaults.yaml' as default_settings %}
-{% set flink = default_settings.get('flink') %}
-{% do default_settings.flink.java.update(salt['pillar.get']('flink:java', {})) %}
+{% from 'flink/map.jinja' import flink_settings with context %}
 
 {% set curl_opts = '-b oraclelicense=accept-securebackup-cookie -L -s' %}
 {% set tar_file = '/tmp/java.tar.gz' %}
 
 download_jre_tarball:
     cmd.run:
-        - unless: curl {{ curl_opts }} -o "{{ tar_file }}" {{ flink.java.url }}
+        - unless: curl {{ curl_opts }} -o "{{ tar_file }}" {{ flink_settings.java.url }}
 
 extract_jre_tarball:
     archive.extracted:
         - name: /opt/
-        - if_missing: /opt/{{ flink.java.name }}
+        - if_missing: /opt/{{ flink_settings.java.name }}
         - source: file://{{ tar_file }}
-        - source_hash: {{ flink.java.hash }}
+        - source_hash: {{ flink_settings.java.hash }}
         - archive_format: tar
 
 symlink_to_java_home:
     file.symlink:
-        - name: {{ flink.java.home }}
-        - target: /opt/{{ flink.java.name }}
+        - name: {{ flink_settings.java.home }}
+        - target: /opt/{{ flink_settings.java.name }}
 
 set_java_home_env:
     file.managed:
@@ -31,9 +29,4 @@ set_java_home_env:
         - group: root
         - mode: 644
         - context:
-            java_home: {{ flink.java.home }}
-
-remove_jre_tarball:
-    file.absent:
-        - name: {{ tar_file }}
-
+            java_home: {{ flink_settings.java.home }}

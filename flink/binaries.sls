@@ -1,21 +1,18 @@
-{% import_yaml 'flink/defaults.yaml' as default_settings %}
-{% set flink = default_settings.get('flink') %}
-{% do default_settings.flink.update(salt['pillar.get']('flink', {})) %}
+{% from 'flink/map.jinja' import flink_settings with context %}
 
 download_and_extract_flink_tarball:
     archive.extracted:
         - name: /opt/
-        - if_missing: /opt/flink-{{ flink.version }}
-        - source: http://mirror.nohup.it/apache/flink/flink-{{ flink.version }}/flink-{{ flink.version }}-bin-hadoop{{ flink.hadoop_version }}-scala_{{ flink.scala_version }}.tgz
-        - source_hash: http://www-eu.apache.org/dist/flink/flink-{{ flink.version }}/flink-{{ flink.version }}-bin-hadoop{{ flink.hadoop_version }}-scala_{{ flink.scala_version }}.tgz.sha
+        - if_missing: /opt/flink-{{ flink_settings.version }}
+        - source: {{ flink_settings.binaries_base_url }}/flink/flink-{{ flink_settings.version }}/flink-{{ flink_settings.version }}-bin-hadoop{{ flink_settings.hadoop_version }}-scala_{{ flink_settings.scala_version }}.tgz
+        - source_hash: {{ flink_settings.hash_base_url }}/dist/flink/flink-{{ flink_settings.version }}/flink-{{ flink_settings.version }}-bin-hadoop{{ flink_settings.hadoop_version }}-scala_{{ flink_settings.scala_version }}.tgz.sha
         - archive_format: tar
-        - user: {{ flink.user }}
-        - group: {{ flink.group }}
+        - user: {{ flink_settings.env.user }}
+        - group: {{ flink_settings.env.user }}
 
 link_to_flink_binaries:
     file.symlink:
-        - name: {{ flink.home }}
-        - target: /opt/flink-{{ flink.version }}
-        - user: {{ flink.user }}
-        - group: {{ flink.group }}
-
+        - name: {{ flink_settings.env.home }}
+        - target: /opt/flink-{{ flink_settings.version }}
+        - user: {{ flink_settings.env.user }}
+        - group: {{ flink_settings.env.user }}

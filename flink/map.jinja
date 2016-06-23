@@ -1,41 +1,5 @@
-{%
-set ssh = salt['grains.filter_by'](
-    {
-        'default': {
-            'packages':[],
-        },
-        'Debian': {
-            'packages':[
-                'openssh-client',
-                'openssh-server',
-            ],
-            'service': 'ssh',
-        },
-        'Ubuntu': {
-             'packages':[
-                'openssh-client',
-                'openssh-server',
-            ],
-            'service': 'ssh',
-        },
-        'CentOS': {
-            'packages':[
-                'openssh-clients',
-                'openssh-server',
-            ],
-            'service': 'sshd',
-        },
-        'RedHat': {
-            'packages':[
-                'openssh-clients',
-                'openssh-server',
-            ],
-            'service': 'sshd',
-        },
-    },
-    grain='os',
-    merge=salt['pillar.get']('ssh:lookup'),
-    default='default',
-    base='default'
-)
-%}
+{% import_yaml "flink/defaults.yaml" as default_settings %}
+{% set flink_settings = salt['pillar.get'](
+    'flink',
+    default=default_settings.flink,
+    merge=True) %}
