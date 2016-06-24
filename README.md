@@ -37,9 +37,10 @@ This state is inspired and can be substituted by
 
 ### [`flink.ssh`](./flink/ssh.sls)
 
-> To be finalised
-
-It installs and configures OpenSSH as Flink likes.
+It installs and run OpenSSH (client, server). For a more accurate installation
+it is strongly suggested to substitute this state with
+[openssh-formula](https://github.com/saltstack-formulas/openssh-formula) from
+the SaltStack community.
 
 ### [`flink.binaries`](./flink/binaries.sls)
 
