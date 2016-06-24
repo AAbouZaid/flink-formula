@@ -1,4 +1,29 @@
 {% import_yaml "flink/defaults.yaml" as default_settings %}
+
+{% set os_family_map = salt['grains.filter_by']({
+    'Debian': {
+        'openssh': {
+            'pkgs': [
+                'openssh-server',
+                'openssh-client'
+            ],
+            'service': 'ssh'
+        }
+    },
+    'RedHat': {
+        'openssh': {
+            'pkgs': [
+                'openssh-server',
+                'openssh-client'
+            ],
+            'service': 'sshd'
+        }
+    },
+  }, grain="os_family", merge=salt['pillar.get']('flink:lookup'))
+%}
+
+{% do default_settings.flink.update(os_family_map) %}
+
 {% set flink_settings = salt['pillar.get'](
     'flink',
     default=default_settings.flink,
