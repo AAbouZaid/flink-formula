@@ -1,19 +1,14 @@
-{% from 'flink/map.jinja' import ssh with context %}
+{% from 'flink/map.jinja' import flink_settings with context %}
 
-install-ssh:
+install_openssh:
     pkg.installed:
         - refresh: true
         - pkgs:
-        {% for package in ssh.packages %}
-            - {{ package }}
+        {% for pkg in flink_settings.openssh.pkgs %}
+            - {{ pkg }}
         {% endfor %}
 
-configure-ssh:
-    cmd.run:
-        - unless: echo "Soon available..."
-
-run-ssh-server:
+run_and_enable_openssh_daemon:
     service.running:
-        - name: {{ ssh.service }}
+        - name: {{ flink_settings.openssh.service }}
         - enable: True
-
