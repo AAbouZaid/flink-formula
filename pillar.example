@@ -75,12 +75,7 @@ flink:
     master:
         host_name: flink-master
         ip_addr: 192.168.100.254
-        pubkey: >
-            SvFpPT+iTcGpwsds2gdtsRgT0zCMGqJiYqPD7Fi42bptW7l/A7k51SZus4af9Zjs
-            9/grwIjHFpu61VcGcSZMUD6+vijrnMkaXTf0Sw7B171wl/+LPfvq9hGp3mM1cT2H
-            jbY/BoZq8+mNVNQjF6cW0VfUKXfi8c0NZziF/QfHzLpsqFIlKVTY+/k2+zkNvvm3
-            c+mvsXvM1iwFR94vFEY00F5jW/RiDt4XfRuDRlotHxV4W2McFaCU3LWuCIZTpowc
-            /TUrLKuoIYYZDeNb7ZEz5ICfuhxbgc1wYSsgieLtb74=
+        pubkey: AAAAB3NzaC1kc3MAAACBAL0sQ9fJ5bYTEyY==
 
 # ----------------------------------------------------------------------------
 # Full example
@@ -128,9 +123,4 @@ flink:
     master:
         host_name: flink-master
         ip_addr: 192.168.100.254
-        pubkey: >
-            SvFpPT+iTcGpwsds2gdtsRgT0zCMGqJiYqPD7Fi42bptW7l/A7k51SZus4af9Zjs
-            9/grwIjHFpu61VcGcSZMUD6+vijrnMkaXTf0Sw7B171wl/+LPfvq9hGp3mM1cT2H
-            jbY/BoZq8+mNVNQjF6cW0VfUKXfi8c0NZziF/QfHzLpsqFIlKVTY+/k2+zkNvvm3
-            c+mvsXvM1iwFR94vFEY00F5jW/RiDt4XfRuDRlotHxV4W2McFaCU3LWuCIZTpowc
-            /TUrLKuoIYYZDeNb7ZEz5ICfuhxbgc1wYSsgieLtb74=
+        pubkey: AAAAB3NzaC1kc3MAAACBAL0sQ9fJ5bYTEyY==

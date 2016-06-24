@@ -18,10 +18,12 @@ add_{{ slave.host_name }}_to_hosts_file:
 {% endfor %}
 {% endif %}
 
-configure_flink:
+{% if flink_settings.conf is defined %}
+configure_flink_jobmanager:
     file.managed:
         - name: {{ flink_settings.env.conf }}/flink-conf.yaml
         - source: salt://flink/files/flink-conf.jinja
         - template: jinja
         - context:
             flink_conf: {{ flink_settings.conf }}
+{% endif %}
