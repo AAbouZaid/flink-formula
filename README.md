@@ -103,10 +103,31 @@ Slave nodes can be defined as `(host_name, ip_addr)` or simply with
 
 ### [`flink.taskmanager`](./flink/taskmanager.sls)
 
-> To be implemented
-
 It configures a Flink's taskmanager.
-The state can be modified via pillars.
+The state can be modified with pillar as follows.
+
+```yaml
+flink:
+    conf:
+        jobmanager.heap.mb: 256
+        jobmanager.rpc.address: localhost
+        jobmanager.rpc.port: 6123
+        jobmanager.web.port: 8081
+        parallelism.default: 1
+        taskmanager.heap.mb: 512
+        taskmanager.memory.preallocate: false
+        taskmanager.numberOfTaskSlots: 1
+    master:
+        host_name: flink-master
+        ip_addr: 192.168.100.254
+        pubkey: AAAAB3NzaC1kc3MAAACBAL0sQ9fJ5bYTEyY==
+```
+
+About `flink.conf` you may refer to `flink.jobmanager` documentation.
+
+`flink.master` contains the information about the Flink's master node to allow
+SSH connections. `ip_addr` is optional and if defined, an entry in
+`/etc/hosts` is appended.
 
 ## References
 
