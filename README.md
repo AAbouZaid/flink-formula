@@ -44,7 +44,24 @@ It installs and configures OpenSSH as Flink likes.
 ### [`flink.binaries`](./flink/binaries.sls)
 
 It installs the Flink's binaries.
-The state can be modified via pillars.
+The state can be modified with pillar as follows.
+
+```yaml
+flink:
+    version: 1.0.3
+    hadoop_version: 27
+    scala_version: 2.11
+    binaries_base_url: http://mirror.nohup.it/apache
+    hash_base_url: http://www-eu.apache.org
+```
+
+`version`, `hadoop_version` and `scala_version` are used to select the Flink's
+version to be installed. More details on the
+[Flink's download page](https://flink.apache.org/downloads.html).
+
+To enhance download performances, `binary_base_url` and `hash_base_url` should
+be set according to your location. For instance, take a look
+[here](http://www.apache.org/dyn/closer.lua/flink/flink-1.0.3/flink-1.0.3-bin-hadoop27-scala_2.11.tgz).
 
 ### [`flink.jobmanager`](./flink/jobmanager.sls)
 
