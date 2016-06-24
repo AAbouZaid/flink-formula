@@ -79,14 +79,27 @@ flink:
         taskmanager.heap.mb: 512
         taskmanager.memory.preallocate: false
         taskmanager.numberOfTaskSlots: 1
+    slaves:
+        - host_name: flink-slave-1
+          ip_addr: 192.168.100.1
+        - host_name: flink-slave-2
+          ip_addr: 192.168.100.2
+        - host_name: flink-slave-3
+          ip_addr: 192.168.100.3
 ```
 
 The full list of usable keys under `flink.conf` is listed on the
 [Flink Configuration](https://ci.apache.org/projects/flink/flink-docs-master/setup/config.html)
-page.
-
-`flink.conf` is optional. Without defining it in pillar, Flink will be
+page. `flink.conf` is optional. Without defining it in pillar, Flink will be
 installed with the default configuration.
+
+Elements of the `flink.slaves` list represent the cluster's slave nodes and
+they are used to fill `$FLINK_HOME/conf/slaves`.
+`flink.slaves` is optional. Without defining it in pillar,
+`$FLINK_HOME/conf/slaves` will be leaved untouched.
+
+Slave nodes can be defined as `(host_name, ip_addr)` or simply with
+`host_name`. In the first case, an entry in `/etc/hosts` will be added.
 
 ### [`flink.taskmanager`](./flink/taskmanager.sls)
 
