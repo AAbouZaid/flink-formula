@@ -66,19 +66,27 @@ be set according to your location. For instance, take a look
 ### [`flink.jobmanager`](./flink/jobmanager.sls)
 
 It configures a Flink's jobmanager.
-The state can be modified via pillar as follow.
+The state can be modified with pillar as follow.
 
 ```yaml
-flink_conf:
-    jobmanager.heap.mb: 256
-    jobmanager.rpc.address: localhost
-    jobmanager.rpc.port: 6123
-    jobmanager.web.port: 8081
-    parallelism.default: 1
-    taskmanager.heap.mb: 512
-    taskmanager.memory.preallocate: false
-    taskmanager.numberOfTaskSlots: 1
+flink:
+    conf:
+        jobmanager.heap.mb: 256
+        jobmanager.rpc.address: localhost
+        jobmanager.rpc.port: 6123
+        jobmanager.web.port: 8081
+        parallelism.default: 1
+        taskmanager.heap.mb: 512
+        taskmanager.memory.preallocate: false
+        taskmanager.numberOfTaskSlots: 1
 ```
+
+The full list of usable keys under `flink.conf` is listed on the
+[Flink Configuration](https://ci.apache.org/projects/flink/flink-docs-master/setup/config.html)
+page.
+
+`flink.conf` is optional. Without defining it in pillar, Flink will be
+installed with the default configuration.
 
 ### [`flink.taskmanager`](./flink/taskmanager.sls)
 
