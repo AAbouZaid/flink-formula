@@ -20,6 +20,7 @@ flink:
         home: /opt/flink
         conf: /opt/flink/conf
         user: flink
+        group: flink
     # Flink's configuration (optional)
     conf:
         jobmanager.heap.mb: 256
@@ -38,6 +39,13 @@ flink:
           ip_addr: 192.168.100.2
         - host_name: flink-slave-3
           ip_addr: 192.168.100.3
+    master:
+        ssh:
+            privkey: |
+                -----BEGIN RSA PRIVATE KEY-----
+                NOT_DEFINED
+                -----END RSA PRIVATE KEY-----
+            pubkey: ssh-rsa AAAAB3NzaC1kc3MAAACBAL0sQ9fJ5bYTEyY== flink@flink-master
 
 # ----------------------------------------------------------------------------
 # Taskmanager example
@@ -61,6 +69,7 @@ flink:
         home: /opt/flink
         conf: /opt/flink/conf
         user: flink
+        group: flink
     # Flink's configuration
     conf:
         jobmanager.heap.mb: 256
@@ -75,7 +84,8 @@ flink:
     master:
         host_name: flink-master
         ip_addr: 192.168.100.254
-        pubkey: AAAAB3NzaC1kc3MAAACBAL0sQ9fJ5bYTEyY==
+        ssh:
+            pubkey: ssh-rsa AAAAB3NzaC1kc3MAAACBAL0sQ9fJ5bYTEyY== flink@flink-master
 
 # ----------------------------------------------------------------------------
 # Full example
@@ -99,8 +109,10 @@ flink:
         home: /opt/flink
         conf: /opt/flink/conf
         user: flink
+        group: flink
         groups:
             - root
+            - users
     # Flink's configuration (optional)
     conf:
         jobmanager.heap.mb: 256
@@ -119,8 +131,13 @@ flink:
           ip_addr: 192.168.100.2
         - host_name: flink-slave-3
           ip_addr: 192.168.100.3
-    # taskmanager specific (optional)
+    # taskmanager/jobmanager specific (optional)
     master:
         host_name: flink-master
         ip_addr: 192.168.100.254
-        pubkey: AAAAB3NzaC1kc3MAAACBAL0sQ9fJ5bYTEyY==
+        ssh:
+            privkey: |
+                -----BEGIN RSA PRIVATE KEY-----
+                NOT_DEFINED
+                -----END RSA PRIVATE KEY-----
+            pubkey: ssh-rsa AAAAB3NzaC1kc3MAAACBAL0sQ9fJ5bYTEyY== flink@flink-master

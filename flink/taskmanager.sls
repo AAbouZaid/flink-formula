@@ -4,10 +4,8 @@
 allow_ssh_connection_from_master:
     ssh_auth.present:
         - user: flink
-        - enc: ssh-rsa
-        - comment: flink@{{ flink_settings.master.host_name }}
         - names:
-            - {{ flink_settings.master.pubkey }}
+            - {{ flink_settings.master.ssh.pubkey }}
 
 {% if flink_settings.master.ip_addr is defined %}
 add_{{ flink_settings.master.host_name }}_to_hosts_file:
