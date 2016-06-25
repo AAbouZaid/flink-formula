@@ -17,6 +17,26 @@ The formula includes the following states:
 ### [`flink.user`](./flink/user.sls)
 
 It creates the `flink` user.
+The state can be modified via pillar as follows
+
+```yaml
+flink:
+    env:
+        groups:
+            - root
+            - users
+    master:
+        ssh:
+            privkey: |
+                -----BEGIN RSA PRIVATE KEY-----
+                NOT_DEFINED
+                -----END RSA PRIVATE KEY-----
+            pubkey: ssh-rsa AAAAB3NzaC1kc3MAAACBAL0sQ9fJ5bYTEyY== flink@flink-master
+```
+
+`flink.env.groups` lists the groups where the `flink` user will be member of.
+
+`flink.master.ssh` contains the SSH keypair.
 
 ### [`flink.java`](./flink/java.sls)
 
@@ -121,7 +141,8 @@ flink:
     master:
         host_name: flink-master
         ip_addr: 192.168.100.254
-        pubkey: AAAAB3NzaC1kc3MAAACBAL0sQ9fJ5bYTEyY==
+        ssh:
+            pubkey: ssh-rsa AAAAB3NzaC1kc3MAAACBAL0sQ9fJ5bYTEyY== flink@flink-master
 ```
 
 About `flink.conf` you may refer to `flink.jobmanager` documentation.
