@@ -16,3 +16,16 @@ link_to_flink_binaries:
         - target: /opt/flink-{{ flink_settings.version }}
         - user: {{ flink_settings.env.user }}
         - group: {{ flink_settings.env.user }}
+
+add_flink_profile:
+    file.managed:
+        - name: /etc/profile.d/flink.sh
+        - source: salt://flink/files/flink.jinja
+        - template: jinja
+        - user: root
+        - group: root
+        - mode: 644
+        - context:
+            flink_home: {{ flink_settings.env.home }}
+            flink_user: {{ flink_settings.env.user }}
+
